@@ -12,11 +12,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 //@Target(ElementType.) //can use in method only.
 
-public @interface VbAnnotation {
+public @interface SerializedViews {
     int resourceId();
 }
 
 
-@interface VbField {
+@interface EasyField {
     String mappingId();
 }

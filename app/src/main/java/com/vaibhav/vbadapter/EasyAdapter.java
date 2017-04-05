@@ -24,7 +24,7 @@ import java.util.List;
  * Created by Vaibhav Bansod on 4/4/2017.
  */
 
-public class VbAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public class EasyAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     private Context context;
     private Class<T> modelClass;
     private Class<VH> viewHolderClass;
@@ -33,13 +33,13 @@ public class VbAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerVi
 
     private ArrayList<T> list = new ArrayList<T>();
 
-    public VbAdapter(Context context, Class<T> modelClass, Class viewHolderClass) {
+    public EasyAdapter(Context context, Class<T> modelClass, Class viewHolderClass) {
         this.context = context;
         this.modelClass = modelClass;
         this.viewHolderClass = viewHolderClass;
         for (Annotation f : viewHolderClass.getDeclaredAnnotations()) {
             if (f != null)
-                resourceId = ((VbAnnotation) f).resourceId();
+                resourceId = ((SerializedViews) f).resourceId();
         }
     }
 
@@ -64,11 +64,11 @@ public class VbAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerVi
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        VbModel t = (VbModel) list.get(position);
+        EasyModel t = (EasyModel) list.get(position);
 
 
         for (Field field : t.getClass().getDeclaredFields()) {
-            VbField annotation = field.getAnnotation(VbField.class);
+            EasyField annotation = field.getAnnotation(EasyField.class);
             if (annotation != null) {
                 String s = annotation.mappingId();
 
@@ -97,7 +97,7 @@ public class VbAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerVi
         }
 
         for (Field field : viewHolderClass.getDeclaredFields()) {
-            VbField annotation = field.getAnnotation(VbField.class);
+            EasyField annotation = field.getAnnotation(EasyField.class);
             if (annotation != null) {
                 String mappId = annotation.mappingId();
                 if (mappId.equalsIgnoreCase(mappingId)) {
@@ -115,6 +115,12 @@ public class VbAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerVi
                             ((Button) viewType).setText(value);
                         } else if (viewType instanceof CheckBox) {
 
+                            try {
+                                ((CheckBox) viewType).setChecked(((Boolean) o));
+                            } catch (ClassCastException e) {
+                                throw new ClassCastException("Value of model type is not proper for corrosponding view");
+                            } catch (Exception e) {
+                            }
                         }
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
@@ -142,7 +148,7 @@ public class VbAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerVi
 }
 
 
-class VbModel {
+class EasyModel {
 
 }
 

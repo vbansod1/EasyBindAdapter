@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(model);
         list.add(model1);
 
-        VbAdapter<SampleModel, ViewHolder> adapter = new VbAdapter<SampleModel, ViewHolder>(this, SampleModel.class, ViewHolder.class);
+        EasyAdapter<SampleModel, ViewHolder> adapter = new EasyAdapter<SampleModel, ViewHolder>(this, SampleModel.class, ViewHolder.class);
         recyclerView.setAdapter(adapter);
         adapter.setList(list);
 
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-@VbAnnotation(resourceId = R.layout.inner_layout)
+@SerializedViews(resourceId = R.layout.inner_layout)
 class ViewHolder extends RecyclerView.ViewHolder {
 
-    @VbField(mappingId = "name")
+    @EasyField(mappingId = "name")
     public TextView title;
 
     public ViewHolder(View itemView) {
