@@ -32,7 +32,7 @@ This README would normally document whatever steps are necessary to get your app
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-              ### android:tag="title"
+               android:tag="title"  //should be same as mappingId declared in model class
 	      />
 	
 
