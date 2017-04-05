@@ -2,7 +2,7 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-### Quick summary###
+### Quick summary
 * Version 1.0
 * Adapter for recyclerview that bind model class to the corresponding view. Hides complexity and easy to use.
 
