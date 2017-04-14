@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.vaibhav.vbadapter.adapters.EasyAdapter;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,23 +35,11 @@ public class MainActivity extends AppCompatActivity {
         list.add(model);
         list.add(model1);
 
-        EasyAdapter<SampleModel, ViewHolder> adapter = new EasyAdapter<SampleModel, ViewHolder>(this, SampleModel.class, ViewHolder.class);
-        recyclerView.setAdapter(adapter);
-        adapter.setList(list);
 
-    }
-
-
-}
-
-@SerializedViews(resourceId = R.layout.inner_layout)
-class ViewHolder extends RecyclerView.ViewHolder {
-
-    @EasyField(mappingId = "name")
-    public TextView title;
-
-    public ViewHolder(View itemView) {
-        super(itemView);
-        title = (TextView) itemView.findViewById(R.id.title);
+        EasyAdapter.with(this)
+                .resource(R.layout.inner_layout)
+                .items(list, SampleModel.class)
+                .into(recyclerView);
     }
 }
+

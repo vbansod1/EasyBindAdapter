@@ -17,6 +17,3 @@ public @interface SerializedViews {
 }
 
 
-@interface EasyField {
-    String mappingId();
-}

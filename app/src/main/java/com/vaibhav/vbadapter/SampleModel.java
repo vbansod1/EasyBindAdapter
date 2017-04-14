@@ -5,12 +5,12 @@ package com.vaibhav.vbadapter;
  */
 
 
-public class SampleModel extends VbModel {
+public class SampleModel {
 
-    @VbField(mappingId = "name")
+    @EasyField(tag = "title")
     String name;
 
-    @VbField(mappingId = "desc")
+    @EasyField(tag = "desc")
     String desc;
 
 }
